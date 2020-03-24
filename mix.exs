@@ -19,7 +19,9 @@ defmodule CovidParser.MixProject do
   def application do
     [
       mod: {CovidParser.Application, []},
-      extra_applications: [:logger, :runtime_tools, :con_cache, :httpoison]
+      extra_applications: [
+        :logger, :runtime_tools, :con_cache, :httpoison,
+        :timex]
     ]
   end
 
@@ -42,7 +44,7 @@ defmodule CovidParser.MixProject do
       {:quantum, "~> 3.0-rc"},
       {:con_cache, "~> 0.13"},
       {:httpoison, "~> 1.6"},
-
+      {:timex, "~> 3.5"}
     ]
   end
 end
