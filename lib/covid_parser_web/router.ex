@@ -13,10 +13,10 @@ defmodule CovidParserWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", CovidParserWeb do
+  scope "/api/", CovidParserWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", PageController, :show
   end
 
   # Other scopes may use custom stacks.

@@ -6,7 +6,7 @@ defmodule CovidParser.Cron do
   """
   def update_cache do
     url = Application.get_env(:covid_parser, __MODULE__, :covid_data_url)
-    CovidParser.Cron.Fetcher.get_value(url[:covid_data_url])
+    CovidParser.Cron.Fetcher.save_value(url[:covid_data_url])
     :ok
   end
 end
