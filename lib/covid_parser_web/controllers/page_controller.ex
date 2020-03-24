@@ -13,6 +13,9 @@ defmodule CovidParserWeb.PageController do
     json(conn, full)
   end
 
+  @doc """
+  Filters the data map through data and country.
+  """
   def filter!(full, country, date) do
     if country == nil && date == nil do
       full
@@ -27,13 +30,22 @@ defmodule CovidParserWeb.PageController do
     end
   end
 
-  defp filter_per_date!(timestamped_data, date) do
+  @doc """
+  Filter the data per date. It checks if the date starts
+  with a custom string.
+  """
+  def filter_per_date!(timestamped_data, date) do
     Enum.filter timestamped_data, fn per_date ->
       String.starts_with?(per_date["date"], date)
     end
   end
 
-  defp filter_per_country!(timestamped_data, country) do
+  @doc """
+  Filters the data per country. It checks if there are
+  any countries which start with the given string. This is
+  case agnostic.
+  """
+  def filter_per_country!(timestamped_data, country) do
     country = String.upcase(country)
 
     return =
