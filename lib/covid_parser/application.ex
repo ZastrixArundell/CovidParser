@@ -12,7 +12,8 @@ defmodule CovidParser.Application do
       CovidParserWeb.Endpoint,
       # Starts a worker by calling: CovidParser.Worker.start_link(arg)
       # {CovidParser.Worker, arg},
-      {ConCache, [name: :covid, ttl_check_interval: false]}
+      {ConCache, [name: :covid, ttl_check_interval: false]},
+      CovidParser.Cron
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

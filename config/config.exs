@@ -23,6 +23,13 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :covid_parser, CovidParser.Cron,
+  covid_data_url: System.get_env("COVID_DATA_URL") || "https://wuflu.banic.stream/john_hopkins_csse_data.json",
+  jobs: [
+    # Every 5 minutes
+    {"*/5 * * * *", fn -> CovidParser.Cron.update_cache() end},
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
