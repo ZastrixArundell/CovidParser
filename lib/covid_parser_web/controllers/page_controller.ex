@@ -17,7 +17,7 @@ defmodule CovidParserWeb.PageController do
   Filters the data map through data and country.
   """
   def filter!(full, country, date) do
-    if country == nil && date == nil do
+    if country == "" && date == "" do
       full
     else
       latest_fetch = full["latest_fetch"]
@@ -35,8 +35,12 @@ defmodule CovidParserWeb.PageController do
   with a custom string.
   """
   def filter_per_date!(timestamped_data, date) do
-    Enum.filter timestamped_data, fn per_date ->
-      String.starts_with?(per_date["date"], date)
+    if date == "" do
+      timestamped_data
+    else
+      Enum.filter timestamped_data, fn per_date ->
+        String.starts_with?(per_date["date"], date)
+      end
     end
   end
 
@@ -46,21 +50,26 @@ defmodule CovidParserWeb.PageController do
   case agnostic.
   """
   def filter_per_country!(timestamped_data, country) do
-    country = String.upcase(country)
+    if country == "" do
+      timestamped_data
+    else
+      country = String.upcase(country)
 
-    return =
-      Enum.map timestamped_data, fn per_date ->
-        areas =
-          Enum.filter per_date["areas"], fn area ->
-            name = String.upcase(area["name"])
-            real_name = String.upcase(area["real_name"])
+      return =
+        Enum.map timestamped_data, fn per_date ->
+          areas =
+            Enum.filter per_date["areas"], fn area ->
+              name = String.upcase(area["name"])
+              real_name = String.upcase(area["real_name"])
 
-            name == country || real_name == country
-          end
+              name == country || real_name == country
+            end
 
-        %{per_date | "areas" => areas}
-      end
+          %{per_date | "areas" => areas}
+        end
 
-    Enum.filter return, fn value -> !Enum.empty?(value["areas"]) end
+      Enum.filter return, fn value -> !Enum.empty?(value["areas"]) end
+    end
+
   end
 end

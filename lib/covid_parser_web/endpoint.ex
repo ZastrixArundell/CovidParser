@@ -10,10 +10,6 @@ defmodule CovidParserWeb.Endpoint do
     signing_salt: "smL1VH6i"
   ]
 
-  socket "/socket", CovidParserWeb.UserSocket,
-    websocket: true,
-    longpoll: false
-
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phx.digest
