@@ -1,5 +1,7 @@
-# CovidParser
+# CovidParser 
 A relay server for queries and blazing fast response about the situation of Covid19. 
+
+![Covid19](https://www.centennialco.gov/files/sharedassets/public/images/residents/covid-19.png?dimension=pageimage&w=480 "Covid19")
 
 ## How does this work?
 CovidParses gets the data from [john_hopkins_csse_data](https://wuflu.banic.stream/john_hopkins_csse_data.json) or any site specified with `COVID_DATA_URL` (**The structure of the JSON response needs to be the same as csse_data!**) and stores in the ETS for fast response. 
