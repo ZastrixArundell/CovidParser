@@ -9,9 +9,10 @@ defmodule CovidParser.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      CovidParserWeb.Endpoint
+      CovidParserWeb.Endpoint,
       # Starts a worker by calling: CovidParser.Worker.start_link(arg)
       # {CovidParser.Worker, arg},
+      {ConCache, [name: :covid, ttl_check_interval: false]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
