@@ -1,16 +1,22 @@
 defmodule CovidParserWeb.PageController do
   use CovidParserWeb, :controller
 
-  @spec show(Plug.Conn.t(), any) :: Plug.Conn.t()
-  def show(conn, params) do
+  @spec index(Plug.Conn.t(), any) :: Plug.Conn.t()
+  def index(conn, params) do
     country = params["country"] || ""
     date = params["date"] || ""
 
-    full =
-      CovidParser.Cron.Fetcher.get_value()
-      |> filter!(country, date)
+    data = CovidParser.Cron.Fetcher.get_value()
 
-    json(conn, full)
+    if data == nil do
+      json(conn, "{}")
+    else
+      full =
+        data
+        |> filter!(country, date)
+
+      json(conn, full)
+    end
   end
 
   @doc """

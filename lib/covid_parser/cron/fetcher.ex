@@ -15,7 +15,7 @@ defmodule CovidParser.Cron.Fetcher do
     ConCache.put(:covid, :data, data)
   end
 
-  @spec get_value :: map()
+  @spec get_value :: any()
   def get_value do
     ConCache.get(:covid, :data)
   end
